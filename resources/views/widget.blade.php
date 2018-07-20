@@ -9,7 +9,7 @@
 <script id="botmanWidget" src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/chat.js'></script>
 <script>
     var botmanWidget = {
-        chatServer: 'http://contentbox-crud.test/botman'
+        chatServer: 'http://127.0.0.1:8080/botman',
     };
 </script>
 

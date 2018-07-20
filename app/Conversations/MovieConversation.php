@@ -36,11 +36,16 @@ class MovieConversation extends Conversation
             Button::create('Book')->value('book')
         ]);
         //https://tastedive.com/api/similar?k=282329-Tastediv-78W8OZ6H&q=red+hot+chili+peppers
+
+
         $this->ask($question, function ($answer) {
             // detect if button was clicked
             if ($answer->isInteractiveMessageReply()) {
                 if ($answer->getValue() === 'movie') {
-                    $this->say("Your favourite movie is" . $this->getBot()->userStorage()->get('favourite_movie'));
+                    $test = json_decode(file_get_contents('https://tastedive.com/api/similar?k=282329-Tastediv-78W8OZ6H&q=batman'));
+                    $results = $test->Results;
+                    dd ($results);
+                    $this->say("A similiar movie is" . $results);
                 } else {
                     $this->say("Hmm... looking for a book of the same name");
                 }

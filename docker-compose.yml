@@ -1,0 +1,91 @@
+version: "3"
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  app:
+    image: laravel-www
+    container_name: laravel-www
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - redis
+      - mysql
+    env_file:
+      - .docker.env
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app-tier
+    ports:
+      - 8080:80
+    environment:
+      APP_ENV: local
+      CONTAINER_ROLE: app
+
+  scheduler:
+    image: laravel-www
+    container_name: laravel-scheduler
+    depends_on:
+      - app
+      - redis
+      - mysql
+    env_file:
+      - .docker.env
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app-tier
+    environment:
+      CONTAINER_ROLE: scheduler
+      APP_ENV: local
+
+  queue:
+    image: laravel-www
+    container_name: laravel-queue
+    depends_on:
+      - app
+      - redis
+      - mysql
+    env_file:
+      - .docker.env
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app-tier
+    environment:
+      CONTAINER_ROLE: queue
+      APP_ENV: local
+
+  redis:
+    container_name: laravel-redis
+    image: redis:4-alpine
+    networks:
+      - app-tier
+    ports:
+      - 16379:6379
+    volumes:
+      - redis:/data
+
+  mysql:
+    container_name: laravel-mysql
+    image: mysql:5.7
+    networks:
+      - app-tier
+    ports:
+      - 13306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+
+volumes:
+  redis:
+    driver: "local"
+  mysql:
+    driver: "local"
