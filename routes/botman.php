@@ -40,6 +40,6 @@ $botman->fallback(function ($bot) {
     $bot->reply("Hmm I don't know what you are saying. Please try again");
 });
 
-$botman->hears('Find me a movie', BotManMovieController::class . '@startConversation');
+$botman->hears('Wake up botman', BotManController::class . '@startConversation');
 
 
