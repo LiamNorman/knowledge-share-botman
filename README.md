@@ -22,7 +22,7 @@ You can test your bot using the web driver at [tinker](http://127.0.0.1:8080/bot
 Note: Powerpoint is included in root file under `BotMan Intro - Liam Norman.key` for keypoint file and 
 `BotMan Intro - Liam Norman ppt.pptx` for powerpoint file.
 
-## Prerequisies
+## Prerequisites
 
 To install using docker, please ensure you have the relevant version of [Docker CE](https://docs.docker.com/install/) for your OS installed.
 
