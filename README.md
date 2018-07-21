@@ -66,7 +66,8 @@ When you have the Docker environment running you can connect to a database via a
 mysql -u root -proot -P13306 -h 127.0.0.1
 ```
 
-The `docker-compose.yml` file contains the environment configuration for the MySQL database name, users, and root password for reference. The `mysql` service in the Docker Compose file maps port `13306` on the host machine to `3306` on the container so that it doesn't interrupt any local MySQL instances you might have running. I've just added a `1` in front of the `3306` as `13306` if you want an easy way to remember the port exposed for MySQL.
+The `docker-compose.yml` file contains the environment configuration for the MySQL database name, users, and root password for reference. 
+The `mysql` service in the Docker Compose file maps port `13306` on the host machine to `3306` on the container so that it doesn't interrupt any local MySQL instances you might have running. I've just added a `1` in front of the `3306` as `13306` if you want an easy way to remember the port exposed for MySQL.
 
 ## Useful links
 
